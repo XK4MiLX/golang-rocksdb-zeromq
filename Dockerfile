@@ -12,7 +12,7 @@ WORKDIR /home
 
 # Install Go
 
-RUN wget https://golang.org/dl/go1.14.2.linux-amd64.tar.gz && tar xf go1.14.2.linux-amd64.tar.gz && \
+RUN wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz && tar xf go1.17.1.linux-amd64.tar.gz && \
     mv go /opt/go && \
     ln -s /opt/go/bin/go /usr/bin/go
 
