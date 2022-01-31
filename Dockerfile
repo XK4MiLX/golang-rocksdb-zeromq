@@ -23,7 +23,7 @@ WORKDIR /home
 # Install RocksDB
 RUN git clone https://github.com/facebook/rocksdb.git && \
     cd rocksdb && \ 
-    git checkout v6.8.1 && \
+    git checkout v6.22.1 && \
     CFLAGS=-fPIC CXXFLAGS=-fPIC make release 
 
 ENV CGO_CFLAGS="-I/home/rocksdb/include"
@@ -34,7 +34,7 @@ WORKDIR /home
 RUN apt-get install -y autoconf automake
 RUN git clone https://github.com/zeromq/libzmq && \
     cd libzmq && \
-    git checkout v4.2.1 && \
+    git checkout v4.3.4 && \
     ./autogen.sh && \
     ./configure && \
     make && \
