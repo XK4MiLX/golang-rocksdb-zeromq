@@ -33,16 +33,14 @@ jobs:
         name: Build and push latest
         uses: docker/build-push-action@v2
         with:
-          context: golang-rocksbg-zeromq
           push: true
-          tags: gostartups/golang-rocksbg-zeromq:latest
+          tags: gostartups/golang-rocksdb-zeromq:latest
       - 
         name: Build and push with Tag
         uses: docker/build-push-action@v2
         if: 
           ${{ github.event.input.image_tag != null }}
         with:
-          context: golang-rocksbg-zeromq
           push: true
-          tags: gostartups/golang-rocksbg-zeromq:${{ github.event.inputs.image_tag }}
+          tags: gostartups/golang-rocksdb-zeromq:${{ github.event.inputs.image_tag }}
           
