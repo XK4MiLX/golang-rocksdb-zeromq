@@ -31,8 +31,8 @@ WORKDIR /home
 # install rocksdb
 RUN cd /opt && git clone -b $ROCKSDB_VERSION --depth 1 https://github.com/facebook/rocksdb.git
 RUN cd /opt/rocksdb && CFLAGS=-fPIC CXXFLAGS=-fPIC make -j 4 release
-RUN strip /opt/rocksdb/ldb /opt/rocksdb/sst_dump && \
-    cp /opt/rocksdb/ldb /opt/rocksdb/sst_dump /build
+RUN export CGO_CFLAGS="-I/path/to/rocksdb/include"
+RUN export CGO_LDFLAGS="-L/path/to/rocksdb -lrocksdb -lstdc++ -lm -lz -ldl -lbz2 -lsnappy -llz4"
 
 
 WORKDIR /home
@@ -43,5 +43,5 @@ RUN git clone https://github.com/zeromq/libzmq && \
     git checkout v4.2.1 && \
     ./autogen.sh && \
     ./configure && \
-    make && \
+    make -j 4 && \
     make install
