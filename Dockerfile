@@ -1,4 +1,4 @@
-FROM debian:9
+FROM debian:buster-slim
 
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get clean
 
 
-WORKDIR /home
+WORKDIR /root
 
 # Install Go
 
@@ -27,7 +27,7 @@ RUN mkdir -p $GOPATH
 RUN echo -n "GO version: " && go version
 RUN echo -n "GOPATH: " && echo $GOPATH
 
-WORKDIR /home
+WORKDIR /root
 # install rocksdb
 RUN cd /opt && git clone -b $ROCKSDB_VERSION --depth 1 https://github.com/facebook/rocksdb.git
 RUN cd /opt/rocksdb && CFLAGS=-fPIC CXXFLAGS=-fPIC make -j 4 release
@@ -35,7 +35,7 @@ RUN export CGO_CFLAGS="-I/path/to/rocksdb/include"
 RUN export CGO_LDFLAGS="-L/path/to/rocksdb -lrocksdb -lstdc++ -lm -lz -ldl -lbz2 -lsnappy -llz4"
 
 
-WORKDIR /home
+WORKDIR /root
 # Install ZeroMQ
 RUN apt-get install -y autoconf automake
 RUN git clone https://github.com/zeromq/libzmq && \
